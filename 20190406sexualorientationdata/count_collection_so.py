@@ -12,6 +12,8 @@ with open('summarized_sexual_orientation.csv') as csv_file:
 total_user = 0
 total_user_collect_over3 = 0 # 收藏数大于等于3本的人
 
+collection_count = [0,0,0,0,0,0,0,0,0,0,0]
+
 so_only = [0,0,0,0,0,0,0,0] # 只收藏这种性向的人
 so_only_over3 = [0,0,0,0,0,0,0,0] # 只收藏这种性向，且收藏数大于等于三本
 
@@ -22,13 +24,19 @@ accepted_so_count = [0,0,0,0,0,0,0,0] # 能够收藏的性向种类数字，比�
 accepted_so_count_over3 = [0,0,0,0,0,0,0,0] # 能够收藏的性向种类数字，比如【1】说明只收藏一种性向的, 且收藏总数大于等于3本
 
 for count_so in user_so: 
-    user_id = count_so[8]
     accepted = 0
     total_books = 0
     for x in range(0,8):
         if count_so[x]>0:
             accepted += 1
             total_books += count_so[x]
+
+    for y in range(0, 10):
+        if total_books == y:
+            collection_count[y] += 1
+    if total_books > 9:
+            collection_count[10] += 1    
+
     accepted_so_count[accepted] += 1
     if total_books >0:
         total_user += 1
@@ -48,6 +56,7 @@ for count_so in user_so:
 
 print(f'total_user {total_user}')
 print(f'total_user_over3 {total_user_collect_over3}')
+print(f'collection_count {collection_count}')
 print(f'so_only {so_only}')
 print(f'so_only_over3 {so_only_over3}')
 print(f'so_include {so_include}')
